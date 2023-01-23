@@ -39,11 +39,19 @@ function App() {
 
   const dataAdded = (item) => {
     let items = data["items"];
-    item.id = items.length;
-    fetch("https://localhost:3000/items");
-    items.push(item);
-    setData({ items: items });
-    console.log(data);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }
+    fetch("http://localhost:3000/items", requestOptions)
+    .then((response)=> response.json())
+    .then((data) => {
+      items.push(data);
+      setData({ items: items })});
+    
   };
 
   return (
