@@ -23,7 +23,16 @@ function App() {
   [] = componentDidMount(),
   if we pass in a variable it runs whenever the variable changes
   */ 
-
+ const deleteItem = (item) =>{
+  const items = data["items"];
+  console.log("delete-initiated")
+  const requestOptions = { method: "DELETE"}
+  fetch(`http://localhost:3000/items/${item.id}`, requestOptions).then((response) => {if(response.ok){
+    const delId = items.indexOf(item);
+    items.splice(delId,1);
+    setData({items: items})
+  }})
+ }
   const filterData = (data) => {
     const filteredData = [];
     for (const item of data) {
@@ -70,7 +79,7 @@ function App() {
         <Add updateParams={dataAdded} />
       </div>
       <div className="row mt-3">
-        <Display items={filterData(data["items"])} />
+        <Display deleteItem = {deleteItem} items={filterData(data["items"])} />
       </div>
     </div>
   );
