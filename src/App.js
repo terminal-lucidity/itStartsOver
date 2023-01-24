@@ -1,7 +1,7 @@
 import Search from "./searchComp";
 import Add from "./addItemComp.js";
 import Display from "./dispComp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /* Example for styled-components:
 import styled from "styled-components"
@@ -16,6 +16,13 @@ function App() {
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
   };
+  useEffect(()=>{fetch("http://localhost:3000/items")
+    .then((response) => response.json())
+    .then((data) => setData({ items: data}));}, [])    
+  /*
+  [] = componentDidMount(),
+  if we pass in a variable it runs whenever the variable changes
+  */ 
 
   const filterData = (data) => {
     const filteredData = [];

@@ -9,11 +9,22 @@ class RandomInfo extends React.Component {
       count: 0,
     };
   }
+  componentDidMount(){
+    console.log("mounted!!")
+  }
+  componentDidUpdate(){
+    console.log("updated!!")
+  }
+
+  componentWillUnmount(){
+    console.log("unmounted!!")
+  }
   render() {
     const incNot = () => {
       this.setState({
         count: this.state.count + 1,
       });
+      this.props.destroy(false)
     };
     return (
       <div>
